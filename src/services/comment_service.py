@@ -24,3 +24,6 @@ class CommentService(Service):
 
     def delete_comment(self, comment_id: int):
         return self.delete(filters=(self.repository.table.id == comment_id,))
+
+    def get_users_comment(self, user_id: int) -> list[Comment]:
+        return self.read(filters=(self.repository.table.user_id == user_id,))

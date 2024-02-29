@@ -44,6 +44,12 @@ app.register_routes([
                 "description": "Добавление комментария", "methods": ['POST'],
                 "endpoint": comment_service.add_site_comment
             },
+{
+                "path": "/list/{user_id}",
+                "responses": {400: {"description": "Bad request"}},
+                "description": "Получение комментариев пользователя", "methods": ['GET'],
+                "endpoint": comment_service.get_users_comment
+            },
         ]
     ).get_router()
 ])
