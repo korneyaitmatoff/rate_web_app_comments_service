@@ -1,9 +1,18 @@
+import enum
 from datetime import datetime
 
-from sqlalchemy import Column, VARCHAR, TIMESTAMP, Integer, ForeignKey, Text
+from sqlalchemy import Column, VARCHAR, TIMESTAMP, Integer, ForeignKey, Text, Enum
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
+
+
+class EnumCategories(enum.Enum):
+    """Перечисление списка категорий сайтов"""
+    blog = "blog"
+    shop = "shop"
+    social_net = "social_net"
+    other = "other"
 
 
 class User(Base):
@@ -24,6 +33,7 @@ class Site(Base):
     description = Column(VARCHAR, default=None)
     url = Column(VARCHAR)
     user_id = Column(Integer, ForeignKey(User.id))
+    category = Column(Enum(EnumCategories))
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
 
 
